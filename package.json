@@ -5,8 +5,7 @@
 	"main": "dist/PuppeteerStream.js",
 	"types": "dist/PuppeteerStream.d.ts",
 	"scripts": {
-		"build": "tsc -b .",
-		"postinstall": "npm run build"
+		"build": "tsc -b ."
 	},
 	"keywords": [
 		"puppeteer",
