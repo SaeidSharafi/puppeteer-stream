@@ -39,18 +39,8 @@ async function START_RECORDING({
 	});
 
 	const stream = await navigator.mediaDevices.getDisplayMedia({
-		video: video && {
-			...video,
-			mandatory: {
-				...video?.mandatory,
-			},
-		},
-		audio: audio && {
-			...audio,
-			mandatory: {
-				...audio?.mandatory,
-			},
-		},
+		video: true,
+		audio: true,
 	});
 
 	// somtimes needed to sync audio and video
