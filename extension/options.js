@@ -38,28 +38,17 @@ async function START_RECORDING({
 		client.addEventListener("open", resolve);
 	});
 
-	const streamId = await new Promise((resolve, reject) => {
-		chrome.tabCapture.getMediaStreamId({ targetTabId: tabId }, (stream) => {
-			if (stream) resolve(stream);
-			else reject();
-		});
-	});
-
-	const stream = await navigator.mediaDevices.getUserMedia({
+	const stream = await navigator.mediaDevices.getDisplayMedia({
 		video: video && {
 			...video,
 			mandatory: {
 				...video?.mandatory,
-				chromeMediaSource: "tab",
-				chromeMediaSourceId: streamId,
 			},
 		},
 		audio: audio && {
 			...audio,
 			mandatory: {
 				...audio?.mandatory,
-				chromeMediaSource: "tab",
-				chromeMediaSourceId: streamId,
 			},
 		},
 	});
