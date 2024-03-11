@@ -230,12 +230,13 @@ export async function getStream(page: Page, opts: getStreamOptions) {
 			callback(null, chunk);
 		},
 	});
-
+	console.log("stream created");
 	function onConnection(ws: WebSocket, req: IncomingMessage) {
 		const url = new URL(`http://localhost:${port}${req.url}`);
 		if (url.searchParams.get("index") != index.toString()) return;
-
+		console.log("onConnection ");
 		async function close() {
+			console.log("Closing");
 			if (!stream.readableEnded && !stream.writableEnded) stream.end();
 			if (!extension.isClosed() && extension.browser().isConnected()) {
 				// @ts-ignore
@@ -252,6 +253,7 @@ export async function getStream(page: Page, opts: getStreamOptions) {
 		}
 
 		ws.on("message", (data) => {
+			console.log("Writing data to stream");
 			stream.write(data);
 		});
 
